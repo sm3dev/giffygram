@@ -1,0 +1,38 @@
+{
+  "users": [
+    {
+      "name": "Michael Wright",
+      "email": "mrwry7@gmail.com",
+      "dateJoined": 1630524297334,
+      "id": 1
+    },
+    {
+      "name": "Bears",
+      "email": "future-border-collie@sm3.dev",
+      "dateJoined": 1630524297334,
+      "id": 2
+    }
+  ],
+  "posts": [
+      {
+          "id": 0,
+          "title": "Quaking Duck",
+          "dateCreated": 1630524297334,
+          "description": "Duck was acting wacky and started quacking",
+          "imageURL": "https://media.giphy.com/media/j9BdX6naFQ8YLqXvI8/giphy.gif",
+          "userId": 0
+
+      }
+
+  ],
+  "messages": [
+      {
+       "id": 0,
+       "senderId": 0,
+       "recipientId": 0,
+       "subject": "subject of message",
+       "messageBody": "message text",
+       "dateSent": 0   
+      }
+  ]
+}
