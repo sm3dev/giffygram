@@ -14,25 +14,23 @@
     }
   ],
   "posts": [
-      {
-          "id": 0,
-          "title": "Quaking Duck",
-          "dateCreated": 1630524297334,
-          "description": "Duck was acting wacky and started quacking",
-          "imageURL": "https://media.giphy.com/media/j9BdX6naFQ8YLqXvI8/giphy.gif",
-          "userId": 0
-
-      }
-
+    {
+      "id": 0,
+      "title": "Quaking Duck",
+      "dateCreated": 1630524297334,
+      "description": "Duck was acting wacky and started quacking",
+      "imageURL": "https://media.giphy.com/media/j9BdX6naFQ8YLqXvI8/giphy.gif",
+      "userId": 0
+    }
   ],
   "messages": [
-      {
-       "id": 0,
-       "senderId": 0,
-       "recipientId": 0,
-       "subject": "subject of message",
-       "messageBody": "message text",
-       "dateSent": 0   
-      }
+    {
+      "id": 0,
+      "senderId": 0,
+      "recipientId": 0,
+      "subject": "subject of message",
+      "messageBody": "message text",
+      "dateSent": 0
+    }
   ]
 }
