@@ -20,7 +20,7 @@
       "dateCreated": 1630524297334,
       "description": "Duck was acting wacky and started quacking",
       "imageURL": "https://media.giphy.com/media/j9BdX6naFQ8YLqXvI8/giphy.gif",
-      "userId": 0
+      "userId": 1
     },
     {
       "id": 2,
@@ -28,17 +28,33 @@
       "dateCreated": 1630524297334,
       "description": "Duck was acting wacky and started quacking",
       "imageURL": "https://media.giphy.com/media/j9BdX6naFQ8YLqXvI8/giphy.gif",
-      "userId": 0
+      "userId": 1
     }
   ],
   "messages": [
     {
-      "id": 0,
-      "senderId": 0,
-      "recipientId": 0,
-      "subject": "subject of message",
-      "messageBody": "message text",
-      "dateSent": 0
+      "id": 1,
+      "senderId": 1,
+      "recipientId": 2,
+      "subject": "Look what I made!",
+      "messageBody": "You're going to be very happy, my friend",
+      "dateSent": 1630601178083
+    },
+    {
+      "senderId": 1,
+      "recipientId": 2,
+      "subject": "Your headlights are on",
+      "messageBody": "Isn't your car the green one with green wheels? If so, your lights are on!",
+      "dateSent": 1630601178083,
+      "id": 2
+    },
+    {
+      "senderId": 2,
+      "recipientId": 1,
+      "subject": "You call that a knife?",
+      "messageBody": "Yo, that's not a knife. THIS is a knife http://thisisaknife.pizza/ !",
+      "dateSent": 1630601178094,
+      "id": 3
     }
   ]
 }
