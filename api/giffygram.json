@@ -15,8 +15,16 @@
   ],
   "posts": [
     {
-      "id": 0,
-      "title": "Quaking Duck",
+      "id": 1,
+      "title": "Spin Yourself",
+      "dateCreated": 1630524297334,
+      "description": "Duck was acting wacky and started quacking",
+      "imageURL": "https://media.giphy.com/media/j9BdX6naFQ8YLqXvI8/giphy.gif",
+      "userId": 0
+    },
+    {
+      "id": 2,
+      "title": "Spinning McSpinner",
       "dateCreated": 1630524297334,
       "description": "Duck was acting wacky and started quacking",
       "imageURL": "https://media.giphy.com/media/j9BdX6naFQ8YLqXvI8/giphy.gif",
