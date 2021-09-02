@@ -2,7 +2,7 @@
   "users": [
     {
       "name": "Michael Wright",
-      "email": "mrwry7@gmail.com",
+      "email": "mrwry7@gmail.pizza",
       "dateJoined": 1630524297334,
       "id": 1
     },
@@ -20,7 +20,8 @@
       "dateCreated": 1630524297334,
       "description": "Duck was acting wacky and started quacking",
       "imageURL": "https://media.giphy.com/media/j9BdX6naFQ8YLqXvI8/giphy.gif",
-      "userId": 1
+      "authorId": 1,
+      "likedById": [2]
     },
     {
       "id": 2,
@@ -28,7 +29,8 @@
       "dateCreated": 1630524297334,
       "description": "Duck was acting wacky and started quacking",
       "imageURL": "https://media.giphy.com/media/j9BdX6naFQ8YLqXvI8/giphy.gif",
-      "userId": 1
+      "authorId": 1,
+      "likedById": [1, 2]
     }
   ],
   "messages": [
