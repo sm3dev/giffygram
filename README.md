@@ -1,2 +1,1 @@
-# giffygram
-# giffygram project, C51, NSS
+# giffygram project, Michael Wright C51, NSS
