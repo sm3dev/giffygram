@@ -12,18 +12,18 @@ export const Post = (postObject) => {
     //     return foundUser;
     // }
     // nameOfUser(postObject, userObject);
-    return `<section class="post">
+    return `<section id="post--${postObject.id}" class="post border-radius">
     <header>
         <h2 class="post__titleEntry">${postObject.title}</h2>
     </header>
-    <img class="post__image" src="${postObject.imageURL}" />
+    <img class="post__image border-radius" src="${postObject.imageURL}" />
     <section class="post-description__block">
         <p class="post-description__text">${postObject.description}</p></section>
     <section class="author-dated-posted__block">
         <section class="post__author"><span class="post-author__text">Create by: Name goes here</span></section>
         <section class="post__created-date">Posted: ${formattedDate}</section>
     </section>
-    <div><button id="edit--${postObject.id}">Edit</button></div>
+    <div class="button__container"><button class="edit__button inside-post__button" id="edit--${postObject.id}">Edit</button></div>
 
 </section>`
   }

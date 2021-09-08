@@ -21,7 +21,9 @@
       "description": "Duck was acting wacky and started quacking",
       "imageURL": "https://media.giphy.com/media/j9BdX6naFQ8YLqXvI8/giphy.gif",
       "authorId": 1,
-      "likedById": [2]
+      "likedById": [
+        2
+      ]
     },
     {
       "id": 2,
@@ -30,7 +32,37 @@
       "description": "Duck was acting wacky and started quacking",
       "imageURL": "https://media.giphy.com/media/j9BdX6naFQ8YLqXvI8/giphy.gif",
       "authorId": 1,
-      "likedById": [1, 2]
+      "likedById": [
+        1,
+        2
+      ]
+    },
+    {
+      "title": "Toasty",
+      "dateCreated": 1631113325000,
+      "description": "Put a fork in him; he's toast!",
+      "imageURL": "https://media.giphy.com/media/eEtcTm7xuF7nq/giphy.gif",
+      "authorId": 1,
+      "likedById": [
+        0
+      ],
+      "id": 3
+    },
+    {
+      "title": "Garsh darn right!",
+      "imageURL": "https://media.giphy.com/media/NEvPzZ8bd1V4Y/giphy.gif",
+      "description": "You're doing swell!",
+      "authorId": 1,
+      "dateCreated": 1631129887782,
+      "id": 4
+    },
+    {
+      "title": "Boop!",
+      "imageURL": "https://media.giphy.com/media/BUlwrDd97bCYE/giphy.gif",
+      "description": "Oh, I'm sorry. Are we not saying 'phrasing' anymore?",
+      "authorId": 1,
+      "dateCreated": 1631130916834,
+      "id": 5
     }
   ],
   "messages": [
