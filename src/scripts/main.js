@@ -4,6 +4,7 @@ import {
   getMessages,
   usePostCollection,
   createPost,
+  getSinglePost
 } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
 import { NavBar } from "./nav/NavBar.js";
@@ -53,6 +54,7 @@ const startGiffyGram = () => {
   });
 };
 
+// this is the event listener for the main.giffygram elemement
 const applicationElement = document.querySelector(".giffygram");
 
 applicationElement.addEventListener("click", (event) => {
@@ -63,15 +65,20 @@ applicationElement.addEventListener("click", (event) => {
 });
 
 applicationElement.addEventListener("click", (event) => {
+  event.preventDefault();
   if (event.target.id.startsWith("edit")) {
-    // The split() method divides a String into an ordered list of substrings, puts these substrings into an array, and returns the array.
-    console.log("post clicked", event.target.id.split("--"));
-
-    // .split("--")[1] -- This uses the limit of 1
-    // Limit = A non-negative integer specifying a limit on the number of substrings to be included in the array. If provided, splits the string at each occurrence of the specified separator, but stops when limit entries have been placed in the array. Any leftover text is not included in the array at all.
-    console.log("the id is", event.target.id.split("--")[1]);
+    const postId = event.target.id.split("__")[1];
+    getSinglePost(postId)
+      .then(response => {
+        showEdit(response);
+      })
   }
 });
+
+const showEdit = (postObj) => {
+  const entryElement = document.querySelector(".entryForm");
+  entryElement.innerHTML = PostEdit(postObj);
+}
 
 applicationElement.addEventListener("change", (event) => {
   if (event.target.id === "yearSelection") {
