@@ -1,5 +1,7 @@
 export const PostEntry = () => {
     return `<div class="newPost">
+    <h3>Add Post</h3>
+
         <div>
             <input value=""
                    name="postTitle"

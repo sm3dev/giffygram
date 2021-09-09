@@ -15,15 +15,12 @@
   ],
   "posts": [
     {
-      "id": 1,
-      "title": "Spin Yourself",
-      "dateCreated": 1630524297334,
-      "description": "Duck was acting wacky and started quacking",
-      "imageURL": "https://media.giphy.com/media/j9BdX6naFQ8YLqXvI8/giphy.gif",
+      "title": "Bells Out Here!",
+      "imageURL": "https://media.giphy.com/media/C6X3ZoiV8VfGnVQeI8/giphy.gif",
+      "description": "Wait a minute!",
       "authorId": 1,
-      "likedById": [
-        2
-      ]
+      "dateCreated": 1630524297334,
+      "id": 1
     },
     {
       "id": 2,
@@ -63,6 +60,14 @@
       "authorId": 1,
       "dateCreated": 1631130916834,
       "id": 5
+    },
+    {
+      "title": "This is bacon here?",
+      "imageURL": "https://media.giphy.com/media/45a0qpRhksSOc/giphy.gif",
+      "description": "hahahah *cough*",
+      "authorId": 1,
+      "dateCreated": 1631215150616,
+      "id": 6
     }
   ],
   "messages": [

@@ -4,12 +4,15 @@ import {
   getMessages,
   usePostCollection,
   createPost,
-  getSinglePost
+  getSinglePost,
+  getLoggedInUser,
+  updatePost
 } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
 import { NavBar } from "./nav/NavBar.js";
 import { Footer } from "./nav/Footer.js";
 import { PostEntry } from "./feed/PostEntry.js";
+import { PostEdit } from "./feed/PostEdit.js";
 
 const showNavBar = () => {
   //Get a reference to the location on the DOM where the nav will display
@@ -64,6 +67,7 @@ applicationElement.addEventListener("click", (event) => {
   }
 });
 
+// This grabs listens for the Edit Button click
 applicationElement.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id.startsWith("edit")) {
@@ -75,10 +79,48 @@ applicationElement.addEventListener("click", (event) => {
   }
 });
 
+// This function takes a post object and writes it's info into the HTML template inside the PostEdit function
 const showEdit = (postObj) => {
   const entryElement = document.querySelector(".entryForm");
   entryElement.innerHTML = PostEdit(postObj);
 }
+
+// Submit an Editted post
+applicationElement.addEventListener("click", event => {
+  event.preventDefault();
+  if (event.target.id.startsWith("updatePost")) {
+    const postId = event.target.id.split("__")[1];
+    //collect all the details into an object
+    const title = document.querySelector("input[name='postTitle']").value
+    const url = document.querySelector("input[name='postURL']").value
+    const description = document.querySelector("textarea[name='postDescription']").value
+    const dateCreated = document.querySelector("input[name='postTime']").value
+    
+    const postObject = {
+      title: title,
+      imageURL: url,
+      description: description,
+      authorId: getLoggedInUser().id,
+      dateCreated: parseInt(dateCreated),
+      id: parseInt(postId)
+    }
+    
+    updatePost(postObject)
+      .then(response => {
+        showPostList();
+      }).then(showPostEntry());
+  }
+})
+
+// Cancel button 
+applicationElement.addEventListener("click", event => {
+  event.preventDefault();
+  if (event.target.id.endsWith("cancel")) {
+    // const postId = event.target.id.split("__")[1];
+    showPostEntry();
+  }
+})
+
 
 applicationElement.addEventListener("change", (event) => {
   if (event.target.id === "yearSelection") {
@@ -108,6 +150,7 @@ applicationElement.addEventListener("click", (event) => {
   }
 });
 
+// Create a new post
 applicationElement.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id === "newPost__submit") {
@@ -123,7 +166,7 @@ applicationElement.addEventListener("click", (event) => {
       title: title,
       imageURL: url,
       description: description,
-      authorId: 1,
+      authorId: getLoggedInUser().id,
       dateCreated: Date.now(),
     };
 
