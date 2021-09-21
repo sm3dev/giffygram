@@ -3,9 +3,19 @@
 @import "feed.css";
 @import "post.css";
 @import url("https://fonts.googleapis.com/css?family=Comfortaa|Patua+One");
+
+:root {
+    --primary-bg-color: #d1dcff;
+    --secondary-bg-color: #f9ae2b;
+    --primary-border-radius: 5px;
+}
+
 /*Typography
 --------------------------------------------------------------*/
 
+body {
+    background-color: var(--primary-bg-color);
+}
 body, button, input, select, textarea {
     color: #404040;
     font-family: "Comfortaa", Arial, sans-serif;
@@ -48,3 +58,10 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 25%;
 }
 
+.sign-in-form {
+    width: 80vw;
+    background-color: var(--secondary-bg-color);
+    margin-inline: auto;
+    padding: 1rem;
+    border-radius: var(--primary-border-radius);
+}

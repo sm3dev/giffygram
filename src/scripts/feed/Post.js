@@ -1,4 +1,4 @@
-// import { getUsers, getPosts } from "../data/DataManager.js";
+import { getPosts } from "../data/DataManager.js";
 
 export const Post = (postObject) => {
     const dateString = new Date(postObject.dateCreated);
