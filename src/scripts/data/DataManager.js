@@ -4,19 +4,19 @@
 //   email: "mrwry7@gmail.pizza",
 // };
 
-let loggedInUser = {}
+let loggedInUser = {};
 
 export const setLoggedInUser = (userObj) => {
   loggedInUser = userObj;
-}
+};
 
 export const getLoggedInUser = () => {
   return loggedInUser;
 };
 
 export const logoutUser = () => {
-  loggedInUser = {}
-}
+  loggedInUser = {};
+};
 
 export const getUsers = () => {
   return fetch("http://localhost:8088/users").then((response) =>
@@ -25,37 +25,37 @@ export const getUsers = () => {
 };
 
 export const loginUser = (userObj) => {
-  return fetch(`http://localhost:8088/users?name=${userObj.name}&email=${userObj.email}`)
-  .then(response => response.json())
-  .then(parsedUser => {
-    //is there a user?
-    console.log("parsedUser", parsedUser) //data is returned as an array
-    if (parsedUser.length > 0){
-      setLoggedInUser(parsedUser[0]);
-      return getLoggedInUser();
-    }else {
-      //no user
-      return false;
-    }
-  })
-}
+  return fetch(
+    `http://localhost:8088/users?name=${userObj.name}&email=${userObj.email}`
+  )
+    .then((response) => response.json())
+    .then((parsedUser) => {
+      //is there a user?
+      console.log("parsedUser", parsedUser); //data is returned as an array
+      if (parsedUser.length > 0) {
+        setLoggedInUser(parsedUser[0]);
+        return getLoggedInUser();
+      } else {
+        //no user
+        return false;
+      }
+    });
+};
 
 export const registerUser = (userObj) => {
   return fetch(`http://localhost:8088/users`, {
     method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(userObj)
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userObj),
   })
-  .then(response => response.json())
-  .then(parsedUser => {
-    setLoggedInUser(parsedUser);
-    return getLoggedInUser();
-  })
-}
-
-
+    .then((response) => response.json())
+    .then((parsedUser) => {
+      setLoggedInUser(parsedUser);
+      return getLoggedInUser();
+    });
+};
 
 let postCollection = [];
 
@@ -94,48 +94,46 @@ export const createPost = (postObj) => {
 };
 
 // Get posts from a specific user
-// Use this for moods and posts in the Daily Journal 
+// Use this for moods and posts in the Daily Journal
 export const getPosts = () => {
-  const userId = getLoggedInUser().id
+  const userId = getLoggedInUser().id;
   return fetch(`http://localhost:8088/posts?_expand=user`)
-    .then(response => response.json())
-    .then(parsedResponse => {
-      console.log("data with user", parsedResponse)
-      postCollection = parsedResponse
+    .then((response) => response.json())
+    .then((parsedResponse) => {
+      console.log("data with user", parsedResponse);
+      postCollection = parsedResponse;
       return parsedResponse;
-    })
-}
-
+    });
+};
 
 // This method will retrieve a single post. This ensures we have the latest and greatest information from the database.
 export const getSinglePost = (postId) => {
-  return fetch(`http://localhost:8088/posts/${postId}`)
-    .then(response => response.json())
-}
+  return fetch(`http://localhost:8088/posts/${postId}`).then((response) =>
+    response.json()
+  );
+};
 
 // This method will update a post in the database. We will use the database verb PUT in the fetch call. This does not create a new item. This replaces the data with the matching id.
-export const updatePost = postObj => {
+export const updatePost = (postObj) => {
   return fetch(`http://localhost:8088/posts/${postObj.id}`, {
-      method: "PUT",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(postObj)
-
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postObj),
   })
-      .then(response => response.json())
-      .then(getPosts)
-}
+    .then((response) => response.json())
+    .then(getPosts);
+};
 
 // fetch call delete a post
-export const deletePost = postId => {
+export const deletePost = (postId) => {
   return fetch(`http://localhost:8088/posts/${postId}`, {
-      method: "DELETE",
-      headers: {
-          "Content-Type": "application/json"
-      }
-
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
   })
-      .then(response => response.json())
-      .then(getPosts)
-}
+    .then((response) => response.json())
+    .then(getPosts);
+};
