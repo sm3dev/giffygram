@@ -1,6 +1,5 @@
-import { getPosts } from "../data/DataManager.js";
-
 export const Post = (postObject) => {
+
     const dateString = new Date(postObject.dateCreated);
     const formattedDate = dateString.toDateString();
     // const nameOfUser = (postObj) => {
@@ -20,7 +19,7 @@ export const Post = (postObject) => {
     <section class="post-description__block">
         <p class="post-description__text">${postObject.description}</p></section>
     <section class="author-dated-posted__block">
-        <section class="post__author"><span class="post-author__text">Create by: Name goes here</span></section>
+        <section class="post__author"><span class="post-author__text">Create by: ${postObject.user.name}</span></section>
         <section class="post__created-date">Posted: ${formattedDate}</section>
     </section>
     <div class="button__container"><button class="edit__button inside-post__button" id="edit__${postObject.id}">Edit</button>
