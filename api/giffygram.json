@@ -35,39 +35,12 @@
       ]
     },
     {
-      "title": "Toasty",
-      "dateCreated": 1631113325000,
-      "description": "Put a fork in him; he's toast!",
-      "imageURL": "https://media.giphy.com/media/eEtcTm7xuF7nq/giphy.gif",
-      "authorId": 1,
-      "likedById": [
-        0
-      ],
-      "id": 3
-    },
-    {
-      "title": "Garsh darn right!",
+      "title": "I'll be a squirrel's fresh edit",
       "imageURL": "https://media.giphy.com/media/NEvPzZ8bd1V4Y/giphy.gif",
-      "description": "You're doing swell!",
+      "description": "Nailed that Edit post, my guy!",
       "authorId": 1,
       "dateCreated": 1631129887782,
       "id": 4
-    },
-    {
-      "title": "Boop!",
-      "imageURL": "https://media.giphy.com/media/BUlwrDd97bCYE/giphy.gif",
-      "description": "Oh, I'm sorry. Are we not saying 'phrasing' anymore?",
-      "authorId": 1,
-      "dateCreated": 1631130916834,
-      "id": 5
-    },
-    {
-      "title": "This is bacon here?",
-      "imageURL": "https://media.giphy.com/media/45a0qpRhksSOc/giphy.gif",
-      "description": "hahahah *cough*",
-      "authorId": 1,
-      "dateCreated": 1631215150616,
-      "id": 6
     }
   ],
   "messages": [

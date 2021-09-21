@@ -1,3 +1,4 @@
+// This displays the new entry post form
 export const PostEntry = () => {
     return `<div class="newPost">
     <h3>Add Post</h3>

@@ -6,7 +6,8 @@ import {
   createPost,
   getSinglePost,
   getLoggedInUser,
-  updatePost
+  updatePost,
+  deletePost
 } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
 import { NavBar } from "./nav/NavBar.js";
@@ -121,7 +122,7 @@ applicationElement.addEventListener("click", event => {
   }
 })
 
-
+// Filter
 applicationElement.addEventListener("change", (event) => {
   if (event.target.id === "yearSelection") {
     const yearAsNumber = parseInt(event.target.value);
@@ -160,7 +161,6 @@ applicationElement.addEventListener("click", (event) => {
     const description = document.querySelector(
       "textarea[name='postDescription']"
     ).value;
-    //we have not created a user yet - for now, we will hard code `1`.
     //we can add the current time as well
     const postObject = {
       title: title,
@@ -176,5 +176,18 @@ applicationElement.addEventListener("click", (event) => {
     });
   }
 });
+
+// Delete post event listener
+applicationElement.addEventListener("click", event => {
+  event.preventDefault();
+  if (event.target.id.startsWith("delete")) {
+    const postId = event.target.id.split("__")[1];
+    deletePost(postId)
+      .then(response => {
+        showPostList();
+      })
+  }
+})
+
 
 startGiffyGram();
