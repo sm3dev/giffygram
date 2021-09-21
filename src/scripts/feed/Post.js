@@ -1,16 +1,22 @@
+import { getLoggedInUser } from "../data/DataManager.js";
+
 export const Post = (postObject) => {
 
-    const dateString = new Date(postObject.dateCreated);
-    const formattedDate = dateString.toDateString();
-    // const nameOfUser = (postObj) => {
-    //     // tell me the post author user id
-    //     const whichUser = postObj.authorId;
-    //     // const foundUser = userObj[whichUser + 1].name;
-        
-    //     // this function needs to return a users.name value
-    //     return foundUser;
-    // }
-    // nameOfUser(postObject, userObject);
+    const userIdOfLoggedInUser = getLoggedInUser()["id"];
+
+  const dateString = new Date(postObject.dateCreated);
+  const formattedDate = dateString.toDateString();
+  console.log("post author: ", postObject.user.id);
+  console.log("current logged in user: ", userIdOfLoggedInUser);
+
+  // I need a conditional that checks if a current post was created by a userId.
+  // If the logged in user created the current post, show the edit and delete buttons
+  // If the logged in user did not create the current post, do not show the edit and delete buttons
+
+  if (postObject.user.id === userIdOfLoggedInUser) {
+    // 1. Check that post author and the current logged in user match
+
+    // If the logged in user created the current post, return this form with Edit and Delete buttons visible
     return `<section id="post--${postObject.id}" class="post border-radius">
     <header>
         <h2 class="post__titleEntry">${postObject.title}</h2>
@@ -22,11 +28,30 @@ export const Post = (postObject) => {
         <section class="post__author"><span class="post-author__text">Create by: ${postObject.user.name}</span></section>
         <section class="post__created-date">Posted: ${formattedDate}</section>
     </section>
-    <div class="button__container"><button class="edit__button inside-post__button" id="edit__${postObject.id}">Edit</button>
+    <div class="button__container">
+    <button class="edit__button inside-post__button" id="edit__${postObject.id}">Edit</button>
     <button id="delete__${postObject.id}">Delete</button>
     </div>
-</section>`
+</section>`;
+  } else {
+    return `<section id="post--${postObject.id}" class="post border-radius">
+    <header>
+        <h2 class="post__titleEntry">${postObject.title}</h2>
+    </header>
+    <img class="post__image border-radius" src="${postObject.imageURL}" />
+    <section class="post-description__block">
+        <p class="post-description__text">${postObject.description}</p></section>
+    <section class="author-dated-posted__block">
+        <section class="post__author"><span class="post-author__text">Create by: ${postObject.user.name}</span></section>
+        <section class="post__created-date">Posted: ${formattedDate}</section>
+    </section>
+    <div class="button__container">
+    <button disabled class="edit__button inside-post__button" id="edit__${postObject.id}">Edit</button>
+    <button disabled id="delete__${postObject.id}">Delete</button>
+    </div>
+</section>`;
   }
+};
 
 //   reference: https://github.com/nss-day-cohort-51/client-side-mastery/blob/main/book-2-giffygram/chapters/47-GG-PostList-Post.md
 // Displaying More Properties as HTML

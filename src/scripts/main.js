@@ -216,7 +216,6 @@ applicationElement.addEventListener("click", (event) => {
 applicationElement.addEventListener("click", (event) => {
   if (event.target.id === "logout") {
     logoutUser();
-    console.log(getLoggedInUser());
     sessionStorage.clear();
     checkForUser();
     }
@@ -277,7 +276,6 @@ const startGiffyGram = () => {
   getUsers().then((data) => {
     console.log("User Data", data);
   });
-  console.log("who is the current logged in user?", getLoggedInUser());
 };
 
 checkForUser();
