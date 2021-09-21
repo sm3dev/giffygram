@@ -1,12 +1,22 @@
-const loggedInUser = {
-  id: 1,
-  name: "Michael Wright",
-  email: "mrwry7@gmail.pizza",
-};
+// const loggedInUser = {
+//   id: 1,
+//   name: "Michael Wright",
+//   email: "mrwry7@gmail.pizza",
+// };
+
+let loggedInUser = {}
+
+export const setLoggedInUser = (userObj) => {
+  loggedInUser = userObj;
+}
 
 export const getLoggedInUser = () => {
   return loggedInUser;
 };
+
+export const logoutUser = () => {
+  loggedInUser = {}
+}
 
 export const getUsers = () => {
   return fetch("http://localhost:8088/users").then((response) =>

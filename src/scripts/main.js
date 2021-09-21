@@ -7,7 +7,9 @@ import {
   getSinglePost,
   getLoggedInUser,
   updatePost,
-  deletePost
+  deletePost,
+  logoutUser,
+  setLoggedInUser
 } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
 import { NavBar } from "./nav/NavBar.js";
@@ -47,16 +49,19 @@ const showPostList = () => {
   });
 };
 
-const startGiffyGram = () => {
-  showNavBar();
-  showPostEntry();
-  showPostList();
-  showFooter();
-
-  getUsers().then((data) => {
-    console.log("User Data", data);
-  });
+//Check for a user: check that a user is created
+const checkForUser = () => {
+  if (sessionStorage.getItem("user")) {
+    //this is expecting an object. Need to fix
+    setLoggedInUser(JSON.parse(sessionStorage.getItem("user")));
+    startGiffyGram();
+  } else {
+    //show login/register
+    console.log("showLogin");
+  }
 };
+
+// Listeners start here ***********************************************
 
 // this is the event listener for the main.giffygram elemement
 const applicationElement = document.querySelector(".giffygram");
@@ -73,10 +78,9 @@ applicationElement.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id.startsWith("edit")) {
     const postId = event.target.id.split("__")[1];
-    getSinglePost(postId)
-      .then(response => {
-        showEdit(response);
-      })
+    getSinglePost(postId).then((response) => {
+      showEdit(response);
+    });
   }
 });
 
@@ -84,43 +88,46 @@ applicationElement.addEventListener("click", (event) => {
 const showEdit = (postObj) => {
   const entryElement = document.querySelector(".entryForm");
   entryElement.innerHTML = PostEdit(postObj);
-}
+};
 
 // Submit an Editted post
-applicationElement.addEventListener("click", event => {
+applicationElement.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id.startsWith("updatePost")) {
     const postId = event.target.id.split("__")[1];
     //collect all the details into an object
-    const title = document.querySelector("input[name='postTitle']").value
-    const url = document.querySelector("input[name='postURL']").value
-    const description = document.querySelector("textarea[name='postDescription']").value
-    const dateCreated = document.querySelector("input[name='postTime']").value
-    
+    const title = document.querySelector("input[name='postTitle']").value;
+    const url = document.querySelector("input[name='postURL']").value;
+    const description = document.querySelector(
+      "textarea[name='postDescription']"
+    ).value;
+    const dateCreated = document.querySelector("input[name='postTime']").value;
+
     const postObject = {
       title: title,
       imageURL: url,
       description: description,
       authorId: getLoggedInUser().id,
       dateCreated: parseInt(dateCreated),
-      id: parseInt(postId)
-    }
-    
-    updatePost(postObject)
-      .then(response => {
-        showPostList();
-      }).then(showPostEntry());
-  }
-})
+      id: parseInt(postId),
+    };
 
-// Cancel button 
-applicationElement.addEventListener("click", event => {
+    updatePost(postObject)
+      .then((response) => {
+        showPostList();
+      })
+      .then(showPostEntry());
+  }
+});
+
+// Cancel button
+applicationElement.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id.endsWith("cancel")) {
     // const postId = event.target.id.split("__")[1];
     showPostEntry();
   }
-})
+});
 
 // Filter
 applicationElement.addEventListener("change", (event) => {
@@ -178,16 +185,35 @@ applicationElement.addEventListener("click", (event) => {
 });
 
 // Delete post event listener
-applicationElement.addEventListener("click", event => {
+applicationElement.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id.startsWith("delete")) {
     const postId = event.target.id.split("__")[1];
-    deletePost(postId)
-      .then(response => {
-        showPostList();
-      })
+    deletePost(postId).then((response) => {
+      showPostList();
+    });
   }
-})
+});
 
+// Logout
+applicationElement.addEventListener("click", (event) => {
+  if (event.target.id === "logout") {
+    logoutUser();
+    console.log(getLoggedInUser());
+  }
+});
 
-startGiffyGram();
+// The function of the giffygram app
+// It gets run inside a conditional of checkForUser()
+const startGiffyGram = () => {
+  showNavBar();
+  showPostEntry();
+  showPostList();
+  showFooter();
+  getUsers().then((data) => {
+    console.log("User Data", data);
+  });
+  console.log("who is the current logged in user?", getLoggedInUser());
+};
+
+checkForUser();
