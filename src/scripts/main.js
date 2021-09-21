@@ -9,13 +9,17 @@ import {
   updatePost,
   deletePost,
   logoutUser,
-  setLoggedInUser
+  setLoggedInUser,
+  loginUser,
+  registerUser
 } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
 import { NavBar } from "./nav/NavBar.js";
 import { Footer } from "./nav/Footer.js";
 import { PostEntry } from "./feed/PostEntry.js";
 import { PostEdit } from "./feed/PostEdit.js";
+import { RegisterForm } from "./auth/RegisterForm.js";
+import { LoginForm } from "./auth/LoginForm.js";
 
 const showNavBar = () => {
   //Get a reference to the location on the DOM where the nav will display
@@ -57,9 +61,22 @@ const checkForUser = () => {
     startGiffyGram();
   } else {
     //show login/register
-    console.log("showLogin");
+    showLoginRegister();
   }
 };
+
+// This displays the login and registration forms in the DOM. It is invoked in checkForUser()
+const showLoginRegister = () => {
+  showNavBar();
+  const entryElement = document.querySelector(".entryForm");
+
+  //template strings can be used here too
+  entryElement.innerHTML = `${LoginForm()} <hr/> <hr/> ${RegisterForm()}`;
+
+  //make sure the post list is cleared out too
+const postElement = document.querySelector(".postList");
+postElement.innerHTML = "";
+}
 
 // Listeners start here ***********************************************
 
@@ -107,7 +124,7 @@ applicationElement.addEventListener("click", (event) => {
       title: title,
       imageURL: url,
       description: description,
-      authorId: getLoggedInUser().id,
+      userId: getLoggedInUser().id,
       dateCreated: parseInt(dateCreated),
       id: parseInt(postId),
     };
@@ -173,7 +190,7 @@ applicationElement.addEventListener("click", (event) => {
       title: title,
       imageURL: url,
       description: description,
-      authorId: getLoggedInUser().id,
+      userId: getLoggedInUser().id,
       dateCreated: Date.now(),
     };
 
@@ -195,13 +212,60 @@ applicationElement.addEventListener("click", (event) => {
   }
 });
 
-// Logout
+// Logout event listener
 applicationElement.addEventListener("click", (event) => {
   if (event.target.id === "logout") {
     logoutUser();
     console.log(getLoggedInUser());
-  }
+    sessionStorage.clear();
+    checkForUser();
+    }
 });
+
+// Login event listener
+// This allows a user object to be created when a user submits the login form
+applicationElement.addEventListener("click", event => {
+  event.preventDefault();
+  if (event.target.id === "login__submit") {
+    //collect all the details into an object
+    const userObject = {
+      name: document.querySelector("input[name='name']").value,
+      email: document.querySelector("input[name='email']").value
+    }
+    loginUser(userObject)
+    .then(dbUserObj => {
+      if(dbUserObj){
+        sessionStorage.setItem("user", JSON.stringify(dbUserObj));
+        startGiffyGram();
+      }else {
+        //got a false value - no user
+        const entryElement = document.querySelector(".entryForm");
+        entryElement.innerHTML = `<p class="center">WHOA, Tiger! That user does not exist. Please try again or register for your free account.</p> ${LoginForm()} <hr/> <hr/> ${RegisterForm()}`;
+      }
+    })
+  }
+})
+
+// Event listener for new user registration
+applicationElement.addEventListener("click", event => {
+  event.preventDefault();
+  if (event.target.id === "register__submit") {
+    //collect all the details into an object
+    const userObject = {
+      name: document.querySelector("input[name='registerName']").value,
+      email: document.querySelector("input[name='registerEmail']").value,
+      dateJoined: Date.now()
+    }
+    registerUser(userObject)
+    .then(dbUserObj => {
+      sessionStorage.setItem("user", JSON.stringify(dbUserObj));
+      startGiffyGram();
+    })
+  }
+})
+
+
+
 
 // The function of the giffygram app
 // It gets run inside a conditional of checkForUser()

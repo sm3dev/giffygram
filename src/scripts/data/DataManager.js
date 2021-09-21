@@ -24,6 +24,39 @@ export const getUsers = () => {
   );
 };
 
+export const loginUser = (userObj) => {
+  return fetch(`http://localhost:8088/users?name=${userObj.name}&email=${userObj.email}`)
+  .then(response => response.json())
+  .then(parsedUser => {
+    //is there a user?
+    console.log("parsedUser", parsedUser) //data is returned as an array
+    if (parsedUser.length > 0){
+      setLoggedInUser(parsedUser[0]);
+      return getLoggedInUser();
+    }else {
+      //no user
+      return false;
+    }
+  })
+}
+
+export const registerUser = (userObj) => {
+  return fetch(`http://localhost:8088/users`, {
+    method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userObj)
+  })
+  .then(response => response.json())
+  .then(parsedUser => {
+    setLoggedInUser(parsedUser);
+    return getLoggedInUser();
+  })
+}
+
+
+
 let postCollection = [];
 
 export const usePostCollection = () => {
@@ -33,15 +66,16 @@ export const usePostCollection = () => {
   return [...postCollection];
 };
 
-export const getPosts = () => {
-  return fetch("http://localhost:8088/posts")
-    .then((response) => response.json())
-    .then((parsedResponse) => {
-      postCollection = parsedResponse;
-      console.log("Post collection is this:", postCollection);
-      return parsedResponse;
-    });
-};
+// This is commented out because we're using a login version of getPosts()
+// export const getPosts = () => {
+//   return fetch("http://localhost:8088/posts")
+//     .then((response) => response.json())
+//     .then((parsedResponse) => {
+//       postCollection = parsedResponse;
+//       console.log("Post collection is this:", postCollection);
+//       return parsedResponse;
+//     });
+// };
 
 export const getMessages = () => {
   return fetch("http://localhost:8088/messages").then((response) =>
@@ -58,6 +92,20 @@ export const createPost = (postObj) => {
     body: JSON.stringify(postObj),
   }).then((response) => response.json());
 };
+
+// Get posts from a specific user
+// Use this for moods and posts in the Daily Journal 
+export const getPosts = () => {
+  const userId = getLoggedInUser().id
+  return fetch(`http://localhost:8088/posts?_expand=user`)
+    .then(response => response.json())
+    .then(parsedResponse => {
+      console.log("data with user", parsedResponse)
+      postCollection = parsedResponse
+      return parsedResponse;
+    })
+}
+
 
 // This method will retrieve a single post. This ensures we have the latest and greatest information from the database.
 export const getSinglePost = (postId) => {

@@ -1,9 +1,8 @@
 {
   "users": [
     {
-      "name": "Michael Wright",
+      "name": "Michael",
       "email": "mike@nss.pizza",
-      "dateJoined": 1630524297334,
       "id": 1
     },
     {
@@ -11,6 +10,11 @@
       "email": "future-border-collie@sm3.dev",
       "dateJoined": 1630524297334,
       "id": 2
+    },
+    {
+      "name": "Lefto",
+      "email": "bears@nss.pizza",
+      "id": 3
     }
   ],
   "posts": [
@@ -18,7 +22,7 @@
       "title": "Bells Out Here!",
       "imageURL": "https://media.giphy.com/media/C6X3ZoiV8VfGnVQeI8/giphy.gif",
       "description": "Wait a minute!",
-      "authorId": 1,
+      "userId": 1,
       "dateCreated": 1630524297334,
       "id": 1
     },
@@ -28,7 +32,7 @@
       "dateCreated": 1630524297334,
       "description": "Duck was acting wacky and started quacking",
       "imageURL": "https://media.giphy.com/media/j9BdX6naFQ8YLqXvI8/giphy.gif",
-      "authorId": 1,
+      "userId": 1,
       "likedById": [
         1,
         2
@@ -38,7 +42,7 @@
       "title": "I'll be a squirrel's fresh edit",
       "imageURL": "https://media.giphy.com/media/NEvPzZ8bd1V4Y/giphy.gif",
       "description": "Nailed that Edit post, my guy!",
-      "authorId": 1,
+      "userId": 1,
       "dateCreated": 1631129887782,
       "id": 4
     }
