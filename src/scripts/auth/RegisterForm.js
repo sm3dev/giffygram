@@ -1,6 +1,6 @@
 export const RegisterForm = () => {
 
-	return `<div class="newPost sign-in-form">
+	return `<div class="newPost register-form">
 		<h3>Register</h3>
 			<div>
 				<input value=""
