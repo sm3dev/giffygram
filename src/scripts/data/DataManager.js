@@ -58,12 +58,20 @@ export const registerUser = (userObj) => {
 };
 
 let postCollection = [];
+let userPostCollection = [];
 
 export const usePostCollection = () => {
   //Best practice: we don't want to alter the original state, so
   //make a copy of it and then return it
   //The spread operator makes this quick work
   return [...postCollection];
+};
+
+export const useUserPostCollection = () => {
+  //Best practice: we don't want to alter the original state, so
+  //make a copy of it and then return it
+  //The spread operator makes this quick work
+  return [...userPostCollection];
 };
 
 // This is commented out because we're using a login version of getPosts()
@@ -94,13 +102,14 @@ export const createPost = (postObj) => {
 };
 
 // Get posts from a specific user
-// Use this for moods and posts in the Daily Journal
+// Use this for moods and posts in the Daily Journal! The posts can be used to expand the mood object
 export const getPosts = () => {
   const userId = getLoggedInUser().id;
+
   return fetch(`http://localhost:8088/posts?_expand=user`)
     .then((response) => response.json())
     .then((parsedResponse) => {
-      console.log("data with user", parsedResponse);
+      // console.log("data with user", parsedResponse);
       postCollection = parsedResponse;
       return parsedResponse;
     });
@@ -151,9 +160,23 @@ export const postLike = (likeObject) => {
     .then(getPosts);
 };
 
-
 // fetch call to get the number of Likes
 export const getLikes = (postId) => {
-  return fetch(`http://localhost:8088/userLikes?postId=${postId}`)
-    .then(response => response.json())
-}
+  return fetch(`http://localhost:8088/userLikes?postId=${postId}`).then(
+    (response) => response.json()
+  );
+};
+
+// This fetch call gets the posts by a specific user
+// It needs to take a userId as an argument
+export const getThisUsersPosts = () => {
+  const userId = getLoggedInUser().id;
+
+  return fetch(`http://localhost:8088/posts/?userId=${userId}&_expand=user`).then(
+    (response) => response.json()
+  ).then(parsedResponse => {
+    userPostCollection = parsedResponse;
+    return parsedResponse;
+  });
+};
+

@@ -11,7 +11,9 @@ import {
   setLoggedInUser,
   loginUser,
   registerUser,
-  postLike
+  postLike,
+  getThisUsersPosts, 
+  useUserPostCollection
 } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
 import { NavBar } from "./nav/NavBar.js";
@@ -45,11 +47,20 @@ const allUsers = getUsers().then((apiUsers) => {
 //   console.log("Got all the messages now too!", apiMessages);
 // });
 
+// Show all posts
 const showPostList = () => {
   //Get a reference to the location on the DOM where the list will display
   const postElement = document.querySelector(".postList");
   getPosts().then((allPosts) => {
     postElement.innerHTML = PostList(allPosts);
+  });
+};
+
+// Show all posts from a specific user
+const showThisUsersPostList = () => {
+  const postElement = document.querySelector(".postList");
+  getThisUsersPosts().then((allUsersPosts) => {
+    postElement.innerHTML = PostList(allUsersPosts);
   });
 };
 
@@ -74,9 +85,9 @@ const showLoginRegister = () => {
   entryElement.innerHTML = `${LoginForm()} <hr/> <hr/> ${RegisterForm()}`;
 
   //make sure the post list is cleared out too
-const postElement = document.querySelector(".postList");
-postElement.innerHTML = "";
-}
+  const postElement = document.querySelector(".postList");
+  postElement.innerHTML = "";
+};
 
 // Listeners start here ***********************************************
 
@@ -218,66 +229,72 @@ applicationElement.addEventListener("click", (event) => {
     logoutUser();
     sessionStorage.clear();
     checkForUser();
-    }
+  }
 });
 
 // Login event listener
 // This allows a user object to be created when a user submits the login form
-applicationElement.addEventListener("click", event => {
+applicationElement.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id === "login__submit") {
     //collect all the details into an object
     const userObject = {
       name: document.querySelector("input[name='name']").value,
-      email: document.querySelector("input[name='email']").value
-    }
-    loginUser(userObject)
-    .then(dbUserObj => {
-      if(dbUserObj){
+      email: document.querySelector("input[name='email']").value,
+    };
+    loginUser(userObject).then((dbUserObj) => {
+      if (dbUserObj) {
         sessionStorage.setItem("user", JSON.stringify(dbUserObj));
         startGiffyGram();
-      }else {
+      } else {
         //got a false value - no user
         const entryElement = document.querySelector(".entryForm");
         entryElement.innerHTML = `<p class="center">WHOA, Tiger! That user does not exist. Please try again or register for your free account.</p> ${LoginForm()} <hr/> <hr/> ${RegisterForm()}`;
       }
-    })
+    });
   }
-})
+});
 
 // Event listener for new user registration
-applicationElement.addEventListener("click", event => {
+applicationElement.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id === "register__submit") {
     //collect all the details into an object
     const userObject = {
       name: document.querySelector("input[name='registerName']").value,
       email: document.querySelector("input[name='registerEmail']").value,
-      dateJoined: Date.now()
-    }
-    registerUser(userObject)
-    .then(dbUserObj => {
+      dateJoined: Date.now(),
+    };
+    registerUser(userObject).then((dbUserObj) => {
       sessionStorage.setItem("user", JSON.stringify(dbUserObj));
       startGiffyGram();
-    })
+    });
   }
-})
+});
 
 // Like button event listener
-applicationElement.addEventListener("click", event => {
-	event.preventDefault();
-	if (event.target.id.startsWith("like")) {
-	  const likeObject = {
+applicationElement.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (event.target.id.startsWith("like")) {
+    const likeObject = {
       postId: parseInt(event.target.id.split("__")[1]),
-      userId: getLoggedInUser().id
-	  }
-	  postLike(likeObject)
-		.then(response => {
-		  showPostList();
-		})
-	}
-  })
+      userId: getLoggedInUser().id,
+    };
+    postLike(likeObject).then((response) => {
+      showPostList();
+    });
+  }
+});
 
+// Event listener for the showThisUsersPostList that shows only posts published by a specific user
+// Also, this button shouldn't be visible unless a person is logged in. So, I might have to make that change in the template literal
+applicationElement.addEventListener("click", event => {
+  event.preventDefault();
+  if (event.target.id === "myPosts") {
+    console.log(showThisUsersPostList());
+    showThisUsersPostList();
+  }
+})
 
 // The function of the giffygram app
 // It gets run inside a conditional of checkForUser()

@@ -12,7 +12,7 @@
       "id": 2
     },
     {
-      "name": "Lefto",
+      "name": "Bears",
       "email": "bears@nss.pizza",
       "id": 3
     }
@@ -45,6 +45,14 @@
       "userId": 1,
       "dateCreated": 1631129887782,
       "id": 4
+    },
+    {
+      "title": "Hablame",
+      "imageURL": "https://media.giphy.com/media/Qg2siB7GajCyA/giphy.gif",
+      "description": "What seems to be the officer, Problem?",
+      "userId": 3,
+      "dateCreated": 1632334791959,
+      "id": 5
     }
   ],
   "userLikes": [
@@ -77,6 +85,16 @@
       "postId": 4,
       "userId": 1,
       "id": 6
+    },
+    {
+      "postId": 5,
+      "userId": 3,
+      "id": 7
+    },
+    {
+      "postId": 5,
+      "userId": 1,
+      "id": 8
     }
   ]
 }

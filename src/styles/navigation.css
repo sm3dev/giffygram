@@ -13,7 +13,8 @@
     margin: auto;
 }
 
-.navigation__search {
+.navigation__search,
+.navigation__myPosts {
     margin-left: 3rem;
 }
 
@@ -27,7 +28,7 @@
     padding-top: 0.1rem;
 }
 
-.navigation__icon > img {
+.navigation__icon img {
     height: 2rem;
 }
 
