@@ -8,8 +8,8 @@ export const NavBar = () => {
             <div class="navigation__item navigation__search">
                 <input type="text" id="postSearch" placeholder="Search posts..." />
             </div>
-            <div class="navigation__item navigation__myPosts>
-                <button id="myPosts" class="fakeLink"> My Posts</button>
+            <div class="navigation__item navigation__myPosts">
+                <button id="myPosts" class="fakeLink">MY Posts</button>
             </div>
             <div class="navigation__item navigation__message">
                 <img id="directMessageIcon" src="./images/icon-fountain-pen.svg" alt="Direct message" />

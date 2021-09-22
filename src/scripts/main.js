@@ -12,7 +12,8 @@ import {
   loginUser,
   registerUser,
   postLike,
-  getThisUsersPosts,
+  getThisUsersPosts, 
+  useUserPostCollection
 } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
 import { NavBar } from "./nav/NavBar.js";
