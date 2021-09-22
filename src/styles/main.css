@@ -8,6 +8,8 @@
     --primary-bg-color: #d1dcff;
     --secondary-bg-color: #f9ae2b;
     --primary-border-radius: 5px;
+    --primary-text-color: #404040;
+    --primary-highlight-color: #800080;
 }
 
 /*Typography
@@ -24,6 +26,10 @@ body, button, input, select, textarea {
     padding: 0;
     margin: 0;
     margin-bottom: 40px;
+}
+
+button {
+    margin-bottom: 2rem;
 }
 
 h1, h2, h3, h4, h5, h6 {

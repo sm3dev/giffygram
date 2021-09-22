@@ -1,13 +1,19 @@
-import { getLoggedInUser } from "../data/DataManager.js";
+import { getLoggedInUser, getLikes } from "../data/DataManager.js";
+//this needs to be located above the Post declaration
+//this could also be imported to this module
+const getNumberOfLikes = (postId) => {
+    getLikes(postId)
+    .then(response => {
+      document.querySelector(`#likes__${postId}`).innerHTML = `👍 ${response.length}`;
+    })
+  }
 
 export const Post = (postObject) => {
 
-    const userIdOfLoggedInUser = getLoggedInUser()["id"];
+  const userIdOfLoggedInUser = getLoggedInUser()["id"];
 
   const dateString = new Date(postObject.dateCreated);
   const formattedDate = dateString.toDateString();
-  console.log("post author: ", postObject.user.id);
-  console.log("current logged in user: ", userIdOfLoggedInUser);
 
   // I need a conditional that checks if a current post was created by a userId.
   // If the logged in user created the current post, show the edit and delete buttons
@@ -23,7 +29,12 @@ export const Post = (postObject) => {
     </header>
     <img class="post__image border-radius" src="${postObject.imageURL}" />
     <section class="post-description__block">
-        <p class="post-description__text">${postObject.description}</p></section>
+        <p class="post-description__text">${postObject.description}</p>
+    </section>
+    <section class="user-like_block">
+        <button id="like__${postObject.id}">Like</button>
+        <p id="likes__${postObject.id}"> ${getNumberOfLikes(postObject.id)}</p>
+    </section>
     <section class="author-dated-posted__block">
         <section class="post__author"><span class="post-author__text">Create by: ${postObject.user.name}</span></section>
         <section class="post__created-date">Posted: ${formattedDate}</section>
@@ -40,7 +51,12 @@ export const Post = (postObject) => {
     </header>
     <img class="post__image border-radius" src="${postObject.imageURL}" />
     <section class="post-description__block">
-        <p class="post-description__text">${postObject.description}</p></section>
+        <p class="post-description__text">${postObject.description}</p>
+    </section>
+    <section class="user-like_block">
+        <button id="like__${postObject.id}">Like</button>
+        <p id="likes__${postObject.id}"> ${getNumberOfLikes(postObject.id)}</p>
+    </section>
     <section class="author-dated-posted__block">
         <section class="post__author"><span class="post-author__text">Create by: ${postObject.user.name}</span></section>
         <section class="post__created-date">Posted: ${formattedDate}</section>

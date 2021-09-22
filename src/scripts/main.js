@@ -1,7 +1,6 @@
 import {
   getUsers,
   getPosts,
-  getMessages,
   usePostCollection,
   createPost,
   getSinglePost,
@@ -11,7 +10,8 @@ import {
   logoutUser,
   setLoggedInUser,
   loginUser,
-  registerUser
+  registerUser,
+  postLike
 } from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
 import { NavBar } from "./nav/NavBar.js";
@@ -41,9 +41,9 @@ const allUsers = getUsers().then((apiUsers) => {
   console.log("All the users are as follows: ", apiUsers);
 });
 
-const allMessages = getMessages().then((apiMessages) => {
-  console.log("Got all the messages now too!", apiMessages);
-});
+// const allMessages = getMessages().then((apiMessages) => {
+//   console.log("Got all the messages now too!", apiMessages);
+// });
 
 const showPostList = () => {
   //Get a reference to the location on the DOM where the list will display
@@ -263,7 +263,20 @@ applicationElement.addEventListener("click", event => {
   }
 })
 
-
+// Like button event listener
+applicationElement.addEventListener("click", event => {
+	event.preventDefault();
+	if (event.target.id.startsWith("like")) {
+	  const likeObject = {
+      postId: parseInt(event.target.id.split("__")[1]),
+      userId: getLoggedInUser().id
+	  }
+	  postLike(likeObject)
+		.then(response => {
+		  showPostList();
+		})
+	}
+  })
 
 
 // The function of the giffygram app
