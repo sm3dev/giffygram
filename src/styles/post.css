@@ -49,8 +49,8 @@
 }
 
 .post {
-    margin: 0 25%;
-    flex-basis: 50%;
+    margin: 1rem 2rem;
+    flex-basis: 24em;
 }
 
 .post__image {
@@ -77,6 +77,10 @@
     background: #9cc3d0;
     padding: 1rem;
     margin-block: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 }
 
 .border-radius {
@@ -89,4 +93,12 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
+}
+
+.postList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: row;
 }

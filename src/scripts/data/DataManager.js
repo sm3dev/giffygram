@@ -102,9 +102,10 @@ export const createPost = (postObj) => {
 };
 
 // Get posts from a specific user
-// Use this for moods and posts in the Daily Journal
+// Use this for moods and posts in the Daily Journal! The posts can be used to expand the mood object
 export const getPosts = () => {
   const userId = getLoggedInUser().id;
+
   return fetch(`http://localhost:8088/posts?_expand=user`)
     .then((response) => response.json())
     .then((parsedResponse) => {
