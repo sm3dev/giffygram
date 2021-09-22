@@ -33,7 +33,7 @@ export const Post = (postObject) => {
     </section>
     <section class="user-like_block">
         <button id="like__${postObject.id}">Like</button>
-        <p id="likes__${postObject.id}"><i class="fas fa-thumbs-up"></i> ${getNumberOfLikes(postObject.id)}</p>
+        <p id="likes__${postObject.id}"> ${getNumberOfLikes(postObject.id)}</p>
     </section>
     <section class="author-dated-posted__block">
         <section class="post__author"><span class="post-author__text">Create by: ${postObject.user.name}</span></section>
@@ -55,7 +55,7 @@ export const Post = (postObject) => {
     </section>
     <section class="user-like_block">
         <button id="like__${postObject.id}">Like</button>
-        <p id="likes__${postObject.id}"><i class="fas fa-thumbs-up"></i> ${getNumberOfLikes(postObject.id)}</p>
+        <p id="likes__${postObject.id}"> ${getNumberOfLikes(postObject.id)}</p>
     </section>
     <section class="author-dated-posted__block">
         <section class="post__author"><span class="post-author__text">Create by: ${postObject.user.name}</span></section>
