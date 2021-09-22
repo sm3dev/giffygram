@@ -77,11 +77,11 @@ export const usePostCollection = () => {
 //     });
 // };
 
-export const getMessages = () => {
-  return fetch("http://localhost:8088/messages").then((response) =>
-    response.json()
-  );
-};
+// export const getMessages = () => {
+//   return fetch("http://localhost:8088/messages").then((response) =>
+//     response.json()
+//   );
+// };
 
 export const createPost = (postObj) => {
   return fetch("http://localhost:8088/posts", {
@@ -137,3 +137,23 @@ export const deletePost = (postId) => {
     .then((response) => response.json())
     .then(getPosts);
 };
+
+// fetch call to add new Like object to database
+export const postLike = (likeObject) => {
+  return fetch(`http://localhost:8088/userLikes/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(likeObject),
+  })
+    .then((response) => response.json())
+    .then(getPosts);
+};
+
+
+// fetch call to get the number of Likes
+export const getLikes = (postId) => {
+  return fetch(`http://localhost:8088/userLikes?postId=${postId}`)
+    .then(response => response.json())
+}

@@ -47,30 +47,36 @@
       "id": 4
     }
   ],
-  "messages": [
+  "userLikes": [
     {
       "id": 1,
-      "senderId": 1,
-      "recipientId": 2,
-      "subject": "Look what I made!",
-      "messageBody": "You're going to be very happy, my friend",
-      "dateSent": 1630601178083
+      "postId": 1,
+      "userId": 1
     },
     {
-      "senderId": 1,
-      "recipientId": 2,
-      "subject": "Your headlights are on",
-      "messageBody": "Isn't your car the green one with green wheels? If so, your lights are on!",
-      "dateSent": 1630601178083,
+      "postId": 1,
+      "userId": 1,
       "id": 2
     },
     {
-      "senderId": 2,
-      "recipientId": 1,
-      "subject": "You call that a knife?",
-      "messageBody": "Yo, that's not a knife. THIS is a knife http://thisisaknife.pizza/ !",
-      "dateSent": 1630601178094,
+      "postId": 1,
+      "userId": 1,
       "id": 3
+    },
+    {
+      "postId": 2,
+      "userId": 1,
+      "id": 4
+    },
+    {
+      "postId": 1,
+      "userId": 1,
+      "id": 5
+    },
+    {
+      "postId": 4,
+      "userId": 1,
+      "id": 6
     }
   ]
 }

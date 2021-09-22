@@ -26,6 +26,10 @@ body, button, input, select, textarea {
     margin-bottom: 40px;
 }
 
+button {
+    margin-bottom: 2rem;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: "Patua One", serif;
     letter-spacing: 2px;
